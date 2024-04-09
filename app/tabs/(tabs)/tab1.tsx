@@ -42,7 +42,7 @@ const DATA = [
   },
 ];
 
-export default function Tab2() {
+export default function Tab1() {
   const renderItem = ({ item }) => (
     <Card p="$5" borderRadius="$lg" maxWidth={360} mx={2}>
       <Image

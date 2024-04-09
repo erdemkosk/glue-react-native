@@ -11,6 +11,17 @@ import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config";
 import { useColorScheme } from "@/components/useColorScheme";
 import { Slot } from "expo-router";
+import { Provider, useSelector, useDispatch } from 'react-redux';
+import { configureStore , createSlice} from "@reduxjs/toolkit";
+
+import colorModeReducer from "../store"; 
+
+const store = configureStore({
+  reducer: {
+    colorMode: colorModeReducer, // Updated reducer key to match slice name
+  },
+});
+
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -55,13 +66,22 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
 
   return (
+    <Provider store={store}>
     <GluestackUIProvider config={config}>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Slot />
-      </ThemeProvider>
+    <ThemeProviderRoot />
     </GluestackUIProvider>
+    </Provider>
   );
+
+  function ThemeProviderRoot() {
+    const colorScheme = useSelector(state => state.colorMode.colorMode);
+  
+    return (
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <Slot />
+    </ThemeProvider>
+    );
+  }
 }

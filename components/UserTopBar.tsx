@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ExternalLink } from './ExternalLink';
+import { useColorScheme } from "@/components/useColorScheme";
 import {
     Text,
     Box,
@@ -17,8 +18,18 @@ import {
     Switch,
     Icon
 } from '@gluestack-ui/themed';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeColorMode } from '@/store';
+
 
 export default function UserTopBar({ userName, userTitle }: { userName: string, userTitle: string }) {
+    const dispatch = useDispatch();
+    const colorMode = useSelector((state) => state.colorMode.colorMode);
+    
+    const handleThemeChange = () => {
+        dispatch(changeColorMode());
+      };
+
     return (
         <HStack space="md" reversed={false} justifyContent="space-between">
             <Box flexDirection="row">
@@ -31,7 +42,7 @@ export default function UserTopBar({ userName, userTitle }: { userName: string, 
                     />
                 </Avatar>
                 <VStack>
-                    <Heading color="$white" size="sm" fontFamily="$heading" mb="$1">
+                    <Heading color={colorMode === 'dark' ? '$white' : '$black'} size="sm" fontFamily="$heading" mb="$1">
                         {userName}
                     </Heading>
                     <Text size="sm" fontFamily="$heading">
@@ -41,9 +52,9 @@ export default function UserTopBar({ userName, userTitle }: { userName: string, 
             </Box>
             <Box flexDirection="row" justifyContent="center">
                 <HStack space="sm" reversed={false}>
-                    <Icon py="$6" h="$6" w="$6" color="$white" as={SunIcon} />
-                    <Switch my="$2"  size='sm' defaultValue={true} />
-                    <Icon py="$6" h="$6" w="$6" color="$white" as={MoonIcon} />
+                    <Icon py="$6" h="$6" w="$6" color={colorMode === 'dark' ? '$white' : '$black'} as={SunIcon} />
+                    <Switch value= {colorMode === 'dark' ? true :false } onToggle={handleThemeChange} my="$2"  size='sm' defaultValue={true} />
+                    <Icon py="$6" h="$6" w="$6" color={colorMode === 'dark' ? '$white' : '$black'} as={MoonIcon} />
                 </HStack>
             </Box>
         </HStack>
