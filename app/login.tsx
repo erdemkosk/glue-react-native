@@ -23,28 +23,17 @@ import { AppleIcon, FacebookIcon } from "lucide-react-native";
 import { Platform } from "react-native";
 
 
-export default function Login({ routePath }: { routePath: string}){
-    const router = useRouter();
-    const navigation = useNavigation();
+export default function Login({ routePath }: { routePath: string }) {
+  const router = useRouter();
+  const navigation = useNavigation();
 
   const handleLogin = () => {
     router.push(routePath)
   };
 
   return (
-    <KeyboardAvoidingView
-  behavior={Platform.OS === "ios" ? "padding" : "height"}
-  enabled={false}
->
-<ScrollView>
-        <Box
-          $base-my="$16"
-          $base-mx="$5"
-          $lg-my="$24"
-          $lg-mx="$5"
-          justifyContent="space-between"
-        >
-          <Box my="$1/3" justifyContent="center" alignItems="center">
+    <Box>
+      <Box my="$1/3" justifyContent="center" alignItems="center">
             <Logo />
           </Box>
           <Box $base-flexDirection="column" $md-flexDirection="row">
@@ -118,8 +107,6 @@ export default function Login({ routePath }: { routePath: string}){
 
             </VStack>
           </Box>
-        </Box>
-        </ScrollView>
-        </KeyboardAvoidingView>
+          </Box>
   );
 }

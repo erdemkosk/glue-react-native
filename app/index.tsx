@@ -40,17 +40,8 @@ import Login from "./login";
 
 export default function Home() {
   return (
-    <Box flex={1} backgroundColor="$black">
+    <Box flex={1} p='$8' backgroundColor="$black">
       <ScrollView>
-        <Box
-          position="absolute"
-          $base-h={500}
-          $base-w={500}
-          $lg-h={500}
-          $lg-w={500}
-        >
-          <Gradient />
-        </Box>
         <Login routePath="/tabs"></Login>
       </ScrollView>
     </Box>

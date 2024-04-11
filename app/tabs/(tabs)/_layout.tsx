@@ -18,7 +18,6 @@ export default function TabLayout() {
   const colorMode = useSelector((state) => state.colorMode.colorMode);
 
   const handleTabPress = (index: number) => {
-    alert(colorMode)
     setSelectedIndex(index);
   };
 
@@ -80,7 +79,7 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="tab3"
+        name="quiz"
         options={{
           title: "",
           tabBarIcon: ({ color }) => (
