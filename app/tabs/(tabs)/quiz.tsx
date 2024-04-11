@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, Platform } from 'react-native';
+import { FlatList, Platform, Vibration } from 'react-native';
 import {
   Heading,
   Text,
@@ -12,7 +12,7 @@ import {
 import UserTopBar from '@/components/UserTopBar';
 
 
-export default function Tab3() {
+export default function Quiz() {
   const [time, setTime] = useState(new Date());
 
   useEffect(() => {
@@ -22,12 +22,16 @@ export default function Tab3() {
     return () => clearInterval(timer);
   }, []);
 
+  const handlePressIn = (index) => {
+    Vibration.vibrate(100);
+  };
+
   return (
     <Box flex={1} my="$8" py="$8" px="$3">
       <UserTopBar userName='Erdem Köşk' userTitle='Backend Developer' />
       <VStack py="$1/6">
 
-        <Card justifyContent="center" alignItems="center" size="md" variant="elevated" m="$3">
+        <Card h="$3/5" justifyContent="center" alignItems="center" size="md" variant="elevated" m="$3">
           <Box position="absolute" justifyContent="center" alignItems="center" borderRadius={100} top={-50} overflow="hidden" borderWidth={2} borderColor="white" width={100} height={100} backgroundColor="black">
             <Text color="white" fontSize="$xl">
               {time.toLocaleTimeString()}
@@ -38,16 +42,17 @@ export default function Tab3() {
           </Heading>
           <Text size="sm">Start building your next project in minutes</Text>
         </Card>
-        <VStack space='lg' m="$3"><Button >
+        <VStack h="$1/5" space='lg' m="$3">
+          <Button   onPressIn={() => handlePressIn(0)} >
           <ButtonText>Mümtehine / 5. Ayet</ButtonText>
         </Button>
-          <Button >
+          <Button  onPressIn={() => handlePressIn(1)} >
             <ButtonText>Yusuf / 1. Ayet</ButtonText>
           </Button>
-          <Button >
+          <Button   onPressIn={() => handlePressIn(2)} >
             <ButtonText>Bakara / 12. Ayet</ButtonText>
           </Button>
-          <Button >
+          <Button   onPressIn={() => handlePressIn(3)} >
             <ButtonText>ANkebut / 7. Ayet</ButtonText>
           </Button></VStack>
       </VStack>
