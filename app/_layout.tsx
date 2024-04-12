@@ -14,7 +14,7 @@ import { Slot } from "expo-router";
 import { Provider, useSelector, useDispatch } from 'react-redux';
 import { configureStore , createSlice} from "@reduxjs/toolkit";
 
-import colorModeReducer from "../store"; 
+import colorModeReducer from "./store"; 
 
 const store = configureStore({
   reducer: {

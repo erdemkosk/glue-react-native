@@ -19,7 +19,7 @@ import {
     Icon
 } from '@gluestack-ui/themed';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeColorMode } from '@/store';
+import { changeColorMode } from '@/app/store';
 
 
 export default function UserTopBar({ userName, userTitle }: { userName: string, userTitle: string }) {
