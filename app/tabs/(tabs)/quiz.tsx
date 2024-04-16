@@ -58,7 +58,7 @@ export default function Quiz() {
 
   return (
     <Box flex={1} my="$8" py="$8" px="$3">
-      <UserTopBar userName='Erdem Köşk' userTitle='Backend Developer' />
+      <UserTopBar userName='Hafız' userTitle='Sorular' />
       <VStack py="$1/6">
         <Card h="$3/5" justifyContent="center" alignItems="center" size="md" variant="elevated" m="$3">
           <Box position="absolute" justifyContent="center" alignItems="center" borderRadius={100} top={-50} overflow="hidden" borderWidth={2} borderColor="white" width={100} height={100} backgroundColor="black">

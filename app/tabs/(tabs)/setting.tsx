@@ -23,7 +23,7 @@ export default function Setting() {
         <Box flex={1} my="$8" py="$8" px="$3">
             <ScrollView>
                 <VStack space='lg'>
-                    <AppThemeSelector></AppThemeSelector>
+                <UserTopBar userName='Hafız' userTitle='Ayarlar' />
                     <AppLanguageSelector></AppLanguageSelector>
                 </VStack>
 

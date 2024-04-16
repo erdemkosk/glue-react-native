@@ -38,12 +38,12 @@ export default function UserTopBar({ userName, userTitle }: { userName: string, 
                     <AvatarImage
                     alt='ERdem'
                         source={{
-                            uri: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+                            uri: "https://cdn-icons-png.flaticon.com/512/6565/6565368.png",
                         }}
                     />
                 </Avatar>
                 <VStack>
-                    <Heading color={colorMode === 'dark' ? '$white' : '$black'} size="sm" fontFamily="$heading" mb="$1">
+                    <Heading color={colorMode === 'dark' ? '$white' : '$black'} size="md" fontFamily="$heading" mb="$1">
                         {userName}
                     </Heading>
                     <Text size="sm" fontFamily="$heading">

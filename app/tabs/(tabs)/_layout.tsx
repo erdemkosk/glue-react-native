@@ -5,6 +5,7 @@ import { Platform, View } from "react-native";
 import { Icon, GlobeIcon, ShareIcon, FavouriteIcon } from "@gluestack-ui/themed";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useSelector } from "react-redux";
+import { BookOpen, BookOpenText, HelpCircle, Quote, Settings, ShieldQuestion } from "lucide-react-native";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
@@ -37,7 +38,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="tab1"
+        name="read"
         options={{
           title: "",
           tabBarIcon: ({ color }) => (
@@ -47,7 +48,7 @@ export default function TabLayout() {
               borderTopColor:  selectedIndex === 0 ? color : colorMode === 'dark' ? '#ffffff' : '#000000 '  ,
               borderTopWidth: 2
             }}>
-              <Icon h='$6' w='$6' color={selectedIndex === 0 ? color : colorMode === 'dark' ? ' #000000 ' : '#ffffff '} as={FavouriteIcon} />
+              <Icon  size='xl'  color={selectedIndex === 0 ? color : colorMode === 'dark' ? ' #000000 ' : '#ffffff '} as={BookOpenText} />
             </View>
           ),
         }}
@@ -70,7 +71,7 @@ export default function TabLayout() {
               top: Platform.OS === "ios" ? -10 : -20,
               borderRadius: Platform.OS === "ios" ? 25 : 30,
             }}>
-              <Icon h='$8' w='$6' color={'#ffffff'} as={GlobeIcon} />
+              <Icon  size='xl' color={'#ffffff'} as={Quote} />
             </View>
           ),
         }}
@@ -90,7 +91,7 @@ export default function TabLayout() {
               borderTopColor:  selectedIndex === 2 ? color : colorMode === 'dark' ? '#000000 ' : '#ffffff'  ,
               borderTopWidth: 2
             }}>
-              <Icon h='$6' w='$6' color={selectedIndex === 2 ? color : colorMode === 'dark' ? ' #000000' : '#ffffff '} as={ShareIcon} />
+              <Icon  size='xl' color={selectedIndex === 2 ? color : colorMode === 'dark' ? ' #000000' : '#ffffff '} as={Settings} />
             </View>
           ),
         }}

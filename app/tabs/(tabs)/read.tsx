@@ -16,7 +16,7 @@ import UserTopBar from '@/components/UserTopBar';
 import { useSelector } from 'react-redux';
 import { getAllMeccan } from '@/logics/dataHandler';
 
-export default function Tab1() {
+export default function Read() {
   const colorMode = useSelector((state) => state.colorMode.colorMode);
   const meccans = getAllMeccan();
   const [selectedCardIndex, setSelectedCardIndex] = useState(-1); // Default -1, no card selected
@@ -38,14 +38,14 @@ export default function Tab1() {
 
   return (
     <Box flex={1} my="$8" py="$8" px="$3">
-      <UserTopBar userName='Erdem Köşk' userTitle='Backend Developer' />
+      <UserTopBar userName='Hafız' userTitle='Kur-an' />
       <Box py="$4">
         {selectedCardIndex === -1 && (
           <TextInput
             placeholder="Ara..."
             value={searchQuery}
             onChangeText={setSearchQuery}
-            style={{ color: 'white', height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
+            style={{ color: colorMode === 'dark' ? 'white' : 'black', height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
           />
         )}
         {selectedCardIndex === -1 ? (
@@ -67,7 +67,7 @@ export default function Tab1() {
             ))}
           </ScrollView>
         ) : (
-          <Card h="$10/12" justifyContent="center" alignItems="center" size="md" variant="elevated" m="$3">
+          <Card  py='$12' justifyContent="center" alignItems="center" size="md" variant="elevated" m="$3">
             <Button variant="link" onPress={handleBackPress}>
               <ButtonText fontWeight="$medium" fontSize="$sm" color="$textLight900" $dark-color="$textDark300">
                 Geri Dön
@@ -83,13 +83,13 @@ export default function Tab1() {
             </Button>
             <ScrollView>
               {meccans[selectedCardIndex].verses.map((verse, index) => (
-                <Heading py="$10" mb="$1" size="md">
+                <Heading key={index} py="$10" mb="$1" size="md">
                   {index + 1 + ')'} {verse.translation.tr}
-                  <Text textAlign='right'>{verse.text}</Text>
+                  <Text textAlign='right'>{' ' + verse.text}</Text>
                 </Heading>
               ))}
             </ScrollView>
-            <Text size="sm">{meccans[selectedCardIndex].name}</Text>
+            <Text size="sm">{meccans[selectedCardIndex].name + ' / ' + meccans[selectedCardIndex].translation.tr }</Text>
           </Card>
         )}
       </Box>
