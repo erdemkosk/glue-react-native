@@ -45,13 +45,14 @@ export default function Quiz() {
 
   const prepareQuestionAndAnswers = () => {
     const newQuestion = getRandomVerse();
-    const verseText = newQuestion ? `${newQuestion?.verses[0].translation.tr}\n${newQuestion?.verses[0].text}` : '';
+    const verseText = newQuestion ? `${newQuestion?.verses[0].translation.tr}` : '';
     const verseIds = newQuestion ? newQuestion?.verses.map(verse => verse.verseId) : [];
     const newAnswers = verseIds.map((verseId, index) => ({
       text: `${newQuestion?.meccanTranslation.tr} ${verseId}`,
       action: 'primary',
     }));
-    setQuestion({ text: verseText, correctIndex: 0 });
+
+    setQuestion({ text: verseText , arabicText: newQuestion?.verses[0].text, correctIndex: 0 });
     setAnswers(newAnswers);
   };
 
@@ -68,6 +69,9 @@ export default function Quiz() {
           <ScrollView>
             <Heading py="$10" mb="$1" size="md">
               {question ? question.text : ''}
+            </Heading>
+            <Heading textAlign='right' mb="$1" size="md">
+            {question ? question.arabicText : ''}
             </Heading>
           </ScrollView>
           <Text size="sm">Start building your next project in minutes</Text>

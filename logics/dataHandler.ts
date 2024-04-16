@@ -56,4 +56,13 @@ export function getRandomVerse(): Question | null {
         en: randomMeccan.translation.en,
       },
     };
+}
+
+export function getAllMeccan(): Meccan[] | null {
+  if (!quranData) {
+    return null;
   }
+
+
+  return quranData
+}
