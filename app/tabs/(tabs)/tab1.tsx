@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, TextInput } from 'react-native';
 import {
   Heading,
   Text,
@@ -20,24 +20,38 @@ export default function Tab1() {
   const colorMode = useSelector((state) => state.colorMode.colorMode);
   const meccans = getAllMeccan();
   const [selectedCardIndex, setSelectedCardIndex] = useState(-1); // Default -1, no card selected
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleCardPress = (index) => {
     setSelectedCardIndex(index);
   };
 
   const handleBackPress = () => {
-    setSelectedCardIndex(-1); // Reset the selected card index
+    setSelectedCardIndex(-1);
   };
+
+  const filteredMeccans = meccans.filter(meccan =>
+    meccan.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    meccan.transliteration.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    meccan.translation.tr.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <Box flex={1} my="$8" py="$8" px="$3">
-      <UserTopBar userName='Erdem Köşk' userTitle='Backend Developer'></UserTopBar>
+      <UserTopBar userName='Erdem Köşk' userTitle='Backend Developer' />
       <Box py="$4">
+        {selectedCardIndex === -1 && (
+          <TextInput
+            placeholder="Ara..."
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            style={{ color: 'white', height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10, paddingHorizontal: 10 }}
+          />
+        )}
         {selectedCardIndex === -1 ? (
-          // Show all cards if no card is selected
           <ScrollView>
-            {meccans.map((meccan, index) => (
-              <TouchableOpacity key={index} onPress={() => handleCardPress(index)}>
+            {filteredMeccans.map((meccan, index) => (
+              <TouchableOpacity key={index} onPress={() => handleCardPress(meccan.meccanId-1)}>
                 <Card
                   size="md"
                   variant={colorMode === 'dark' ? 'elevated' : 'outline'}
@@ -46,26 +60,16 @@ export default function Tab1() {
                   <Heading textAlign='right' mb="$1" size="md">
                     {meccan.name}
                   </Heading>
-                  <Text size="sm">{meccan.transliteration}</Text>
+                  <Text size="sm">{meccan.transliteration + '/' + meccan.translation.tr}</Text>
                   <Text size="sm">{meccan.total_verses}</Text>
                 </Card>
               </TouchableOpacity>
             ))}
           </ScrollView>
         ) : (
-          // Show detailed card view if a card is selected
-
-
           <Card h="$10/12" justifyContent="center" alignItems="center" size="md" variant="elevated" m="$3">
-
-
             <Button variant="link" onPress={handleBackPress}>
-              <ButtonText
-                fontWeight="$medium"
-                fontSize="$sm"
-                color="$textLight900"
-                $dark-color="$textDark300"
-              >
+              <ButtonText fontWeight="$medium" fontSize="$sm" color="$textLight900" $dark-color="$textDark300">
                 Geri Dön
               </ButtonText>
               <ButtonIcon
@@ -80,18 +84,12 @@ export default function Tab1() {
             <ScrollView>
               {meccans[selectedCardIndex].verses.map((verse, index) => (
                 <Heading py="$10" mb="$1" size="md">
-                  {index + 1 + ')'} {verse.translation.tr} 
-                  
-                  <Text textAlign='right'> {verse.text}</Text>
+                  {index + 1 + ')'} {verse.translation.tr}
+                  <Text textAlign='right'>{verse.text}</Text>
                 </Heading>
-                
               ))}
-
-
-
-
             </ScrollView>
-            <Text size="sm">  {meccans[selectedCardIndex].name}</Text>
+            <Text size="sm">{meccans[selectedCardIndex].name}</Text>
           </Card>
         )}
       </Box>
